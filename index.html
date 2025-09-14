@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Todo App</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header__content">
+                <h1 class="header__title">Todo Manager</h1>
+                <button class="btn btn--secondary theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </div>
+        </header>
+        <main class="main">
+            <section class="task-input-section">
+                <div class="task-input-container">
+                    <input 
+                        type="text" 
+                        class="form-control task-input" 
+                        id="taskInput" 
+                        placeholder="Add a new task... (Press Enter to add)"
+                        maxlength="200"
+                        autocomplete="off"
+                    >
+                    <button class="btn btn--primary add-task-btn" id="addTaskBtn">
+                        <span>Add Task</span>
+                    </button>
+                </div>
+                <div class="task-input-actions">
+                    <label class="priority-label">
+                        Priority:
+                        <select class="form-control priority-select" id="prioritySelect">
+                            <option value="low">Low</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </label>
+                    <input type="date" class="form-control due-date-input" id="dueDateInput" title="Due date">
+                </div>
+            </section>
+
+            <section class="stats-section">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-number" id="totalTasks">0</span>
+                        <span class="stat-label">Total</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" id="activeTasks">0</span>
+                        <span class="stat-label">Active</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number" id="completedTasks">0</span>
+                        <span class="stat-label">Completed</span>
+                    </div>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <span class="progress-text" id="progressText">0% Complete</span>
+                </div>
+            </section>
+            <section class="filter-section">
+                <div class="filter-tabs">
+                    <button class="filter-tab active" data-filter="all">All</button>
+                    <button class="filter-tab" data-filter="active">Active</button>
+                    <button class="filter-tab" data-filter="completed">Completed</button>
+                </div>
+                <div class="search-container">
+                    <input 
+                        type="text" 
+                        class="form-control search-input" 
+                        id="searchInput" 
+                        placeholder="Search tasks..."
+                        autocomplete="off"
+                    >
+                </div>
+            </section>
+            <section class="task-list-section">
+                <div class="task-list" id="taskList">
+                </div>
+                <div class="empty-state" id="emptyState">
+                    <div class="empty-icon">✨</div>
+                    <h3>No tasks yet</h3>
+                    <p>Add a task above to get started with your productivity journey!</p>
+                </div>
+            </section>
+            <section class="bulk-actions-section">
+                <div class="bulk-actions">
+                    <button class="btn btn--secondary" id="markAllBtn">Mark All Complete</button>
+                    <button class="btn btn--secondary" id="clearCompletedBtn">Clear Completed</button>
+                    <button class="btn btn--secondary" id="exportBtn">Export Tasks</button>
+                    <button class="btn btn--secondary" id="undoBtn" disabled>Undo</button>
+                </div>
+            </section>
+        </main>
+        <footer class="footer">
+            <p class="footer__text">
+                Keyboard shortcuts: <kbd>Enter</kbd> to add, <kbd>Esc</kbd> to cancel, <kbd>Delete</kbd> to remove, Double-click to edit
+            </p>
+        </footer>
+    </div>
+    <div class="modal hidden" id="confirmModal">
+        <div class="modal__backdrop"></div>
+        <div class="modal__content">
+            <h3 class="modal__title" id="modalTitle">Confirm Action</h3>
+            <p class="modal__message" id="modalMessage">Are you sure you want to proceed?</p>
+            <div class="modal__actions">
+                <button class="btn btn--secondary" id="modalCancel">Cancel</button>
+                <button class="btn btn--primary" id="modalConfirm">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast hidden" id="toast">
+        <span class="toast__message" id="toastMessage"></span>
+        <button class="toast__close" id="toastClose">&times;</button>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
